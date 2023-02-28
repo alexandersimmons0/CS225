@@ -1,0 +1,14 @@
+Advance by number of kills, collecting items, reaching a certain point
+
+Player:
+decent speed and jump
+multiple weapons to switch between
+PowerUps to assist
+laser to aim
+
+Enemy:
+chase or patrol
+Scout: weak and fast
+Warrior: average
+Heavy: strong and slow
+potentially more for each type
