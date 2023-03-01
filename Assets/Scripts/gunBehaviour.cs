@@ -9,7 +9,7 @@ public class gunBehaviour : MonoBehaviour
     private Renderer rend;
     public float BulletSpeed = 100f;
     private float bulletCount = 12;
-    private float fireRate = 3.0f;
+    private float fireRate = 0.5f;
     private float nextFire = 0.0f;
 
     private bool _isFiring = false;
@@ -32,10 +32,11 @@ public class gunBehaviour : MonoBehaviour
             _isReloading = true;
         }
     }
+    //It might work changing this to update instead of fixed update
     void FixedUpdate(){
         if(gameManager.Gun1){
             rend.enabled = true;
-            if(_isFiring&&Time.time>nextFire){
+            if(_isFiring&&Time.time>nextFire&&bulletCount!=0){
                 nextFire = Time.time + fireRate;
                 GameObject newBullet = Instantiate(bullet, this.transform.position, this.transform.rotation);
                 Rigidbody BulletRB = newBullet.GetComponent<Rigidbody>();
