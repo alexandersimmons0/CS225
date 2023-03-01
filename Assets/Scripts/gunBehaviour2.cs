@@ -7,6 +7,7 @@ public class gunBehaviour2 : MonoBehaviour
     public GameObject bullet;
     private gameManager gameManager;
     private Renderer rend;
+    public float BulletSpeed = 100f;
     private float bulletCount = 30;
     private float fireRate = 0.5f;
     private float nextFire = 0.0f;
@@ -20,6 +21,9 @@ public class gunBehaviour2 : MonoBehaviour
             rend.enabled = true;
             if(Input.GetMouseButton(0)&&Time.time>nextFire){
                 nextFire = Time.time + fireRate;
+                GameObject newBullet = Instantiate(Bullet, this.transform.position, this.transform.rotation);
+                Rigidbody BulletRB = newBullet.GetComponent<Rigidbody>();
+                BulletRB.velocity = this.transform.forward * BulletSpeed;
                 //Create Bullet
                 bulletCount--;
             }
