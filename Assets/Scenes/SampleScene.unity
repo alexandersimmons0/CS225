@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 20774704}
   - component: {fileID: 20774703}
   - component: {fileID: 20774702}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BasePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,6 +241,9 @@ GameObject:
   - component: {fileID: 270644808}
   - component: {fileID: 270644806}
   - component: {fileID: 270644807}
+  - component: {fileID: 270644809}
+  - component: {fileID: 270644810}
+  - component: {fileID: 270644811}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -278,11 +281,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7.5
-  jumpSpeed: 8
-  gravity: 20
+  jumpSpeed: 10
+  JumpChargeTime: 0
+  JumpVelocity: 5
+  gravity: 10
   playerCameraParent: {fileID: 1362461228}
   lookSpeed: 2
   lookXLimit: 60
+  DistanceToGround: 0.1
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 0
   canMove: 1
   firstPersonCamera: {fileID: 2110739260}
   thirdPersonCamera: {fileID: 963194227}
@@ -327,6 +336,93 @@ MonoBehaviour:
   note: 'This is the player. I included a PlaceHolder gun, with a Bullet Spawner
     and Laser Emitter. The Bullet Spawner will need a script designed by you, so
     that we can have multiple bullet types. '
+--- !u!54 &270644809
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270644804}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!136 &270644810
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270644804}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &270644811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270644804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a7afa6cadbdffe48a26301a56ae7ad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSpeed: 10
+  RotateSpeed: 75
+  JumpChargeTime: 0
+  JumpVelocity: 5
+  DistanceToGround: 0.1
+  GroundLayer:
+    m_Bits: 128
+  _ps: {fileID: 0}
+  shieldTimer: 0
+  _gameManager: {fileID: 0}
+  lookSpeed: 2
+  hurt_s: {fileID: 0}
+  hurt: {fileID: 0}
+  fr_get: {fileID: 0}
+  fr_lose: {fileID: 0}
+  die: {fileID: 0}
+  jump: {fileID: 0}
+  jumpL: {fileID: 0}
+  _col: {fileID: 0}
+  _isCharging: 0
+  _isJumping: 0
+  _vInput: 0
+  _hInput: 0
+  _as: {fileID: 0}
+  _rb: {fileID: 0}
 --- !u!1 &279165012
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +432,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 279165013}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Environment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,7 +562,6 @@ GameObject:
   - component: {fileID: 743992470}
   - component: {fileID: 743992469}
   - component: {fileID: 743992473}
-  - component: {fileID: 743992472}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -539,33 +634,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 743992465}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &743992472
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 743992465}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!136 &743992473
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -583,7 +651,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -839,7 +907,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008184643}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.6300605}
+  m_LocalPosition: {x: 0, y: 0, z: 0.546}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6050,7 +6118,7 @@ GameObject:
   - component: {fileID: 2037408314}
   - component: {fileID: 2037408313}
   - component: {fileID: 2037408312}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
