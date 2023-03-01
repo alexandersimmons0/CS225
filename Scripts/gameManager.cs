@@ -14,7 +14,7 @@ public class gameManager : MonoBehaviour;
     private bool gun2;
     public bool Gun2{
         get{return gun2;}
-        set{gun1 = value;}
+        set{gun2 = value;}
     }
     void Update(){
         if(Input.GetKeyUp(KeyCode.Escape)){
