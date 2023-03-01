@@ -21,7 +21,7 @@ public class gunBehaviour2 : MonoBehaviour
             rend.enabled = true;
             if(Input.GetMouseButton(0)&&Time.time>nextFire){
                 nextFire = Time.time + fireRate;
-                GameObject newBullet = Instantiate(Bullet, this.transform.position, this.transform.rotation);
+                GameObject newBullet = Instantiate(bullet, this.transform.position, this.transform.rotation);
                 Rigidbody BulletRB = newBullet.GetComponent<Rigidbody>();
                 BulletRB.velocity = this.transform.forward * BulletSpeed;
                 //Create Bullet
