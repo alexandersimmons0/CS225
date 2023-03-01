@@ -243,7 +243,6 @@ GameObject:
   - component: {fileID: 270644807}
   - component: {fileID: 270644809}
   - component: {fileID: 270644810}
-  - component: {fileID: 270644811}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -266,7 +265,7 @@ Transform:
   - {fileID: 743992466}
   - {fileID: 1362461228}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &270644806
 MonoBehaviour:
@@ -284,6 +283,7 @@ MonoBehaviour:
   jumpSpeed: 10
   JumpChargeTime: 0
   JumpVelocity: 5
+  move: {x: 0, y: 0, z: 0}
   gravity: 10
   playerCameraParent: {fileID: 1362461228}
   lookSpeed: 2
@@ -291,7 +291,9 @@ MonoBehaviour:
   DistanceToGround: 0.1
   GroundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
+  inAirSpeed: 2
+  inAirRotation: 0.8
   canMove: 1
   firstPersonCamera: {fileID: 2110739260}
   thirdPersonCamera: {fileID: 963194227}
@@ -386,43 +388,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &270644811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270644804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a7afa6cadbdffe48a26301a56ae7ad1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MoveSpeed: 10
-  RotateSpeed: 75
-  JumpChargeTime: 0
-  JumpVelocity: 5
-  DistanceToGround: 0.1
-  GroundLayer:
-    m_Bits: 128
-  _ps: {fileID: 0}
-  shieldTimer: 0
-  _gameManager: {fileID: 0}
-  lookSpeed: 2
-  hurt_s: {fileID: 0}
-  hurt: {fileID: 0}
-  fr_get: {fileID: 0}
-  fr_lose: {fileID: 0}
-  die: {fileID: 0}
-  jump: {fileID: 0}
-  jumpL: {fileID: 0}
-  _col: {fileID: 0}
-  _isCharging: 0
-  _isJumping: 0
-  _vInput: 0
-  _hInput: 0
-  _as: {fileID: 0}
-  _rb: {fileID: 0}
 --- !u!1 &279165012
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,6 +857,7 @@ GameObject:
   - component: {fileID: 1008184652}
   - component: {fileID: 1008184649}
   - component: {fileID: 1008184651}
+  - component: {fileID: 1008184653}
   m_Layer: 6
   m_Name: BulletSpawner
   m_TagString: Untagged
@@ -1124,7 +1090,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008184643}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7143c69cb775b44d93678ef750c3f9a, type: 3}
   m_Name: 
@@ -1134,6 +1100,20 @@ MonoBehaviour:
   shootTime: 2
   _timer: 2
   canShoot: 0
+--- !u!114 &1008184653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008184643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a658e1da3850fd24f9ec486885204634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 5291077892433122834, guid: 9791c105f7f0e1a45bc601b3aa8d0d09, type: 3}
+  BulletSpeed: 100
 --- !u!1 &1362461227
 GameObject:
   m_ObjectHideFlags: 0
@@ -1184,6 +1164,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   note: This is here for convienience. Guns will go here.
+--- !u!1 &1507308691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1507308693}
+  - component: {fileID: 1507308692}
+  m_Layer: 0
+  m_Name: gameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1507308692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507308691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6a9fea1019b38842a970d3f8aa94002, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1507308693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507308691}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.7952138, y: 1.5884953, z: -0.4641955}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1670340828
 GameObject:
   m_ObjectHideFlags: 0

@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
         {
             // We are not grounded. We can influence the movementspeed with the vertical axis
 
-            moveDirection += input * speed * 0.006f / (Time.deltaTime+ 2f);
+            moveDirection += input * speed * 0.008f / (Time.deltaTime+ 3f);
         }
 
         // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
