@@ -15,6 +15,7 @@ public class gunBehaviour : MonoBehaviour
         gameManager = GameObject.Find("gameManager").GetComponent<gameManager>();
         rend = GetComponent<MeshRenderer>(); //or whatever render it uses
         rend.enabled = false;
+        gameManager.Gun1 = true;
     }
     void FixedUpdate(){
         if(gameManager.Gun1){
@@ -26,9 +27,11 @@ public class gunBehaviour : MonoBehaviour
                 BulletRB.velocity = this.transform.forward * BulletSpeed;
                 //Create bullet
                 bulletCount--;
+                Debug.Log("shot");
             }
             if(Input.GetKeyDown(KeyCode.R)){
                 bulletCount = 12;
+                Debug.Log("reload");
             }
         }else{
             rend.enabled = false;
