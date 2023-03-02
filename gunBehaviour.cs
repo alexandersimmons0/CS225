@@ -8,7 +8,7 @@ public class gunBehaviour : MonoBehaviour
     private gameManager gameManager;
     private GameObject gun;
     public float BulletSpeed = 20f;
-    private float bulletCount = 2;
+    private float bulletCount = 1;
     private float fireRate = 3.0f;
     private float nextFire = 0.0f;
     void Start(){
@@ -31,7 +31,7 @@ public class gunBehaviour : MonoBehaviour
                 Debug.Log("empty");
             }
             if(Input.GetKeyDown(KeyCode.R)){
-                bulletCount = 2;
+                bulletCount = 1;
                 Debug.Log("reload");
             }
         }else{
