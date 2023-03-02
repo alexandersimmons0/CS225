@@ -8,7 +8,8 @@ public class gunBehaviour : MonoBehaviour
     private gameManager gameManager;
     private GameObject gun;
     public float BulletSpeed = 20f;
-    private float bulletCount = 1;
+    private float bulletCount = 1f;
+    private float bulletTotal = 3f;
     private float fireRate = 3.0f;
     private float nextFire = 0.0f;
     void Start(){
@@ -31,8 +32,12 @@ public class gunBehaviour : MonoBehaviour
                 Debug.Log("empty");
             }
             if(Input.GetKeyDown(KeyCode.R)){
-                bulletCount = 1;
-                Debug.Log("reload");
+                if(bulletTotal>0){
+                    while(bulletCount<1&&bulletTotal>0){
+                        bulletTotal--;
+                        bulletCount++;
+                    }
+                }
             }
         }else{
            gun.SetActive(false);
@@ -40,7 +45,7 @@ public class gunBehaviour : MonoBehaviour
     }
     void OnGUI(){
         if(gameManager.Gun1){    
-            GUI.Box(new Rect(20, 20, 150, 25), ""+bulletCount);
+            GUI.Box(new Rect(20, 20, 80, 25), bulletCount + "  |  " + bulletTotal);
         }
     }
 }
